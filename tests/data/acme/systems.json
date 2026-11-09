@@ -1,0 +1,182 @@
+{
+  "people": {
+    "E100": {
+      "name": "Asha Rao",
+      "title": "Software Engineer",
+      "role": "employee",
+      "status": "active",
+      "joined": "2022-03-14",
+      "manager": "M200",
+      "hrbp": "H300"
+    },
+    "E101": {
+      "name": "Rohan Das",
+      "title": "Data Analyst",
+      "role": "employee",
+      "status": "active",
+      "joined": "2023-07-03",
+      "manager": "M200",
+      "hrbp": "H300"
+    },
+    "E102": {
+      "name": "Kiran Mehta",
+      "title": "QA Engineer",
+      "role": "employee",
+      "status": "exited",
+      "joined": "2021-01-11",
+      "manager": "M200",
+      "hrbp": "H300"
+    },
+    "E103": {
+      "name": "Neha Kapoor",
+      "title": "Designer",
+      "role": "employee",
+      "status": "active",
+      "joined": "2024-02-19",
+      "manager": "M200",
+      "hrbp": "H300"
+    },
+    "H300": {
+      "name": "Priya Nair",
+      "title": "HR Business Partner",
+      "role": "hrbp",
+      "status": "active",
+      "joined": "2019-05-06",
+      "manager": "D500",
+      "hrbp": "D500"
+    },
+    "M200": {
+      "name": "Vikram Shah",
+      "title": "Engineering Manager",
+      "role": "manager",
+      "status": "active",
+      "joined": "2018-09-24",
+      "manager": "D400",
+      "hrbp": "H300"
+    },
+    "D400": {
+      "name": "Sameer Gupta",
+      "title": "Director of Engineering",
+      "role": "director",
+      "status": "active",
+      "joined": "2016-04-01",
+      "manager": null,
+      "hrbp": "H300"
+    },
+    "D500": {
+      "name": "Meera Iyer",
+      "title": "Head of HR",
+      "role": "hr_head",
+      "status": "active",
+      "joined": "2015-08-17",
+      "manager": null,
+      "hrbp": null
+    }
+  },
+  "ledger": {
+    "E100": [
+      {
+        "id": "G-1001",
+        "kind": "grant",
+        "days": 8,
+        "source": "annual leave policy LV-1 v3, 2026 entitlement",
+        "leave": "privileged"
+      },
+      {
+        "id": "T-1041",
+        "kind": "taken",
+        "days": 2,
+        "source": "request LR-1041",
+        "start": "2026-03-09",
+        "end": "2026-03-10",
+        "leave": "privileged"
+      },
+      {
+        "id": "P-1107",
+        "kind": "pending",
+        "days": 2,
+        "source": "request LR-1107 awaiting manager approval",
+        "start": "2026-11-20",
+        "end": "2026-11-21",
+        "leave": "privileged"
+      }
+    ],
+    "E101": [
+      {
+        "id": "G-2001",
+        "kind": "grant",
+        "days": 12,
+        "source": "annual leave policy LV-1 v3, 2026 entitlement",
+        "leave": "privileged"
+      },
+      {
+        "id": "T-2002",
+        "kind": "taken",
+        "days": 1,
+        "source": "request LR-2002",
+        "start": "2026-02-02",
+        "end": "2026-02-02",
+        "leave": "privileged"
+      },
+      {
+        "id": "T-2003",
+        "kind": "taken",
+        "days": 1,
+        "source": "request LR-2003",
+        "start": "2026-05-15",
+        "end": "2026-05-15",
+        "leave": "privileged"
+      },
+      {
+        "id": "T-2010",
+        "kind": "taken",
+        "days": 2,
+        "source": "request LR-2010",
+        "start": "2026-08-10",
+        "end": "2026-08-11",
+        "leave": "privileged"
+      }
+    ],
+    "E102": [
+      {
+        "id": "G-3001",
+        "kind": "grant",
+        "days": 10,
+        "source": "annual leave policy LV-1 v3, 2026 entitlement",
+        "leave": "privileged"
+      }
+    ],
+    "E103": [
+      {
+        "id": "G-4001",
+        "kind": "grant",
+        "days": 10,
+        "source": "annual leave policy LV-1 v3, 2026 entitlement",
+        "leave": "privileged"
+      },
+      {
+        "id": "T-4011",
+        "kind": "taken",
+        "days": 3,
+        "source": "request LR-4011",
+        "start": "2026-06-01",
+        "end": "2026-06-03",
+        "leave": "privileged"
+      },
+      {
+        "id": "T-4012",
+        "kind": "taken",
+        "days": 1,
+        "source": "request LR-4012",
+        "start": "2026-06-02",
+        "end": "2026-06-02",
+        "leave": "privileged"
+      }
+    ]
+  },
+  "templates": {
+    "employment": "Employment verification letter",
+    "visa": "Visa support letter",
+    "salary": "Salary certificate"
+  }
+}

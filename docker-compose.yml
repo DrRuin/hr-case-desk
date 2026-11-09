@@ -1,0 +1,172 @@
+name: case-desk-langfuse
+
+x-langfuse-env: &langfuse-env
+  NEXTAUTH_URL: ${LANGFUSE_UI_URL:-http://127.0.0.1:${LANGFUSE_PORT:-3000}}
+  AUTH_DISABLE_SIGNUP: "true"
+  DATABASE_URL: postgresql://postgres:postgres@postgres:5432/postgres
+  CLICKHOUSE_URL: http://clickhouse:8123
+  CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
+  CLICKHOUSE_USER: clickhouse
+  CLICKHOUSE_PASSWORD: clickhouse
+  CLICKHOUSE_CLUSTER_ENABLED: "false"
+  REDIS_HOST: redis
+  REDIS_PORT: "6379"
+  REDIS_AUTH: redis
+  LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
+  LANGFUSE_S3_EVENT_UPLOAD_REGION: auto
+  LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: minio
+  LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: miniosecret
+  LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://minio:9000
+  LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: "true"
+  TELEMETRY_ENABLED: "false"
+
+x-langfuse-stores: &langfuse-stores
+  postgres:
+    condition: service_healthy
+  clickhouse:
+    condition: service_healthy
+  redis:
+    condition: service_healthy
+  minio:
+    condition: service_healthy
+
+services:
+  langfuse-web:
+    image: docker.langfuse.com/langfuse/langfuse:4.76.0
+    restart: unless-stopped
+    environment:
+      <<: *langfuse-env
+      HOSTNAME: 0.0.0.0
+      LANGFUSE_INIT_ORG_ID: case-desk
+      LANGFUSE_INIT_ORG_NAME: HR case desk
+      LANGFUSE_INIT_PROJECT_ID: case-desk
+      LANGFUSE_INIT_PROJECT_NAME: case-desk
+      LANGFUSE_INIT_USER_NAME: reviewer
+      LANGFUSE_INIT_USER_EMAIL: reviewer@case-desk.local
+    env_file: langfuse.env
+    ports:
+      - 127.0.0.1:${LANGFUSE_PORT:-3000}:3000
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:3000/api/public/health"]
+      interval: 5s
+      retries: 60
+    depends_on: *langfuse-stores
+
+  langfuse-worker:
+    image: docker.langfuse.com/langfuse/langfuse-worker:4.76.0
+    restart: unless-stopped
+    environment: *langfuse-env
+    env_file: langfuse.env
+    depends_on: *langfuse-stores
+
+  prices:
+    image: python:3.13-slim
+    entrypoint: ["sh", "-c", "exec python -c \"$$PRICES\""]
+    env_file: langfuse.env
+    environment:
+      PRICES: |
+        import base64, json, os, urllib.request
+        token = base64.b64encode(f"{os.environ['LANGFUSE_PUBLIC_KEY']}:{os.environ['LANGFUSE_SECRET_KEY']}".encode()).decode()
+        def call(query, body=None):
+            data = json.dumps(body).encode() if body else None
+            headers = {"Authorization": f"Basic {token}", "Content-Type": "application/json"}
+            request = urllib.request.Request(f"http://langfuse-web:3000/api/public/models{query}", data, headers)
+            with urllib.request.urlopen(request) as response:
+                return json.load(response)
+        known, page = set(), 1
+        while True:
+            listed = call(f"?limit=100&page={page}")
+            known |= {m["modelName"] for m in listed["data"]}
+            if page >= listed["meta"]["totalPages"]:
+                break
+            page += 1
+        for model in json.load(open("/prices.json")):
+            if model["modelName"] not in known:
+                call("", model)
+                print("priced", model["modelName"])
+    configs:
+      - source: prices
+        target: /prices.json
+    depends_on:
+      langfuse-web:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:17
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      retries: 10
+
+  clickhouse:
+    image: clickhouse/clickhouse-server:25.12
+    restart: unless-stopped
+    user: "101:101"
+    environment:
+      CLICKHOUSE_DB: default
+      CLICKHOUSE_USER: clickhouse
+      CLICKHOUSE_PASSWORD: clickhouse
+    volumes:
+      - clickhouse:/var/lib/clickhouse
+    healthcheck:
+      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:8123/ping || exit 1"]
+      interval: 5s
+      retries: 10
+
+  redis:
+    image: redis:7
+    restart: unless-stopped
+    command: ["--requirepass", "redis", "--maxmemory-policy", "noeviction"]
+    volumes:
+      - redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "-a", "redis", "ping"]
+      interval: 3s
+      retries: 10
+
+  minio:
+    image: cgr.dev/chainguard/minio
+    restart: unless-stopped
+    entrypoint: ["sh", "-c", "mkdir -p /data/langfuse && minio server --address :9000 /data"]
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: miniosecret
+    volumes:
+      - minio:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 3s
+      retries: 10
+
+volumes:
+  postgres:
+  clickhouse:
+  redis:
+  minio:
+
+configs:
+  prices:
+    content: |
+      [
+        {
+          "modelName": "gpt-6-luna",
+          "matchPattern": "(?i)^(openai/)?(gpt-6-luna)$",
+          "unit": "TOKENS",
+          "pricingTiers": [
+            {
+              "name": "Standard",
+              "isDefault": true,
+              "priority": 0,
+              "conditions": [],
+              "prices": {"input": 1e-07, "input_cache_read": 1e-08, "output": 5e-07, "output_reasoning": 5e-07}
+            }
+          ]
+        }
+      ]

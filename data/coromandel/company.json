@@ -1,0 +1,238 @@
+{
+  "seed": 2031,
+  "today": "2026-11-09",
+  "prefix": "CF",
+  "first_id": 2200,
+  "headcount": 180,
+  "team_size": 8,
+  "people_per_hrbp": 120,
+  "founded": "2011-02-14",
+  "cutoff_day": 15,
+  "leaves": {
+    "privileged": {
+      "code": "PL",
+      "monthly": 1.5,
+      "late": 0.5,
+      "cap": 30,
+      "accrual": "2.1",
+      "carry": "2.2",
+      "bookings": [
+        3,
+        8
+      ],
+      "sizes": {
+        "0.5": 1,
+        "1": 5,
+        "2": 3,
+        "3": 2,
+        "5": 1
+      }
+    },
+    "casual": {
+      "code": "CL",
+      "monthly": 0.5,
+      "late": 0,
+      "cap": 0,
+      "accrual": "3.1",
+      "carry": "3.1",
+      "bookings": [
+        1,
+        4
+      ],
+      "sizes": {
+        "0.5": 3,
+        "1": 4
+      }
+    }
+  },
+  "rates": {
+    "exited": 0.05,
+    "joined_this_year": 0.12,
+    "pending": 0.3,
+    "duplicate": 0.03,
+    "over_cap": 0.15
+  },
+  "pending_until": "2026-12-23",
+  "holidays": [
+    "2026-01-01",
+    "2026-01-26",
+    "2026-03-04",
+    "2026-04-03",
+    "2026-05-01",
+    "2026-08-15",
+    "2026-09-14",
+    "2026-10-02",
+    "2026-10-20",
+    "2026-11-09",
+    "2026-12-25"
+  ],
+  "departments": {
+    "Fleet Operations": {
+      "share": 0.38,
+      "titles": [
+        "Fleet Coordinator",
+        "Dispatch Planner",
+        "Route Analyst"
+      ],
+      "manager": "Fleet Manager",
+      "director": "Director of Operations"
+    },
+    "Warehousing": {
+      "share": 0.27,
+      "titles": [
+        "Warehouse Supervisor",
+        "Inventory Analyst",
+        "Safety Officer"
+      ],
+      "manager": "Warehouse Manager",
+      "director": "Director of Warehousing"
+    },
+    "Sales": {
+      "share": 0.17,
+      "titles": [
+        "Account Manager",
+        "Sales Executive",
+        "Pricing Analyst"
+      ],
+      "manager": "Regional Sales Manager",
+      "director": "Sales Director"
+    },
+    "Finance": {
+      "share": 0.1,
+      "titles": [
+        "Accountant",
+        "Billing Specialist",
+        "Payroll Specialist"
+      ],
+      "manager": "Finance Manager",
+      "director": "Finance Controller"
+    },
+    "People": {
+      "share": 0.08,
+      "titles": [
+        "HR Operations Associate",
+        "Recruiter"
+      ],
+      "manager": "HR Operations Manager",
+      "director": "Chief People Officer"
+    }
+  },
+  "first_names": [
+    "Aarav",
+    "Aditi",
+    "Akash",
+    "Ananya",
+    "Anil",
+    "Anjali",
+    "Arjun",
+    "Bhavna",
+    "Chetan",
+    "Deepa",
+    "Devika",
+    "Dhruv",
+    "Divya",
+    "Farhan",
+    "Gaurav",
+    "Harini",
+    "Ishaan",
+    "Jaya",
+    "Karthik",
+    "Kavya",
+    "Lakshmi",
+    "Manish",
+    "Meghna",
+    "Mohit",
+    "Nandini",
+    "Naveen",
+    "Nikhil",
+    "Pallavi",
+    "Pooja",
+    "Pranav",
+    "Rahul",
+    "Ramya",
+    "Ritika",
+    "Sanjay",
+    "Shreya",
+    "Siddharth",
+    "Sneha",
+    "Suresh",
+    "Tanvi",
+    "Tarun",
+    "Uma",
+    "Varun",
+    "Vidya",
+    "Vivek",
+    "Yamini",
+    "Zoya",
+    "Abhishek",
+    "Aishwarya",
+    "Rakesh",
+    "Swati"
+  ],
+  "last_names": [
+    "Agarwal",
+    "Bhat",
+    "Chandra",
+    "Deshpande",
+    "Fernandes",
+    "Ghosh",
+    "Hegde",
+    "Iyengar",
+    "Jain",
+    "Joshi",
+    "Kamath",
+    "Krishnan",
+    "Kulkarni",
+    "Menon",
+    "Mishra",
+    "Murthy",
+    "Naidu",
+    "Pillai",
+    "Prabhu",
+    "Rajan",
+    "Reddy",
+    "Saxena",
+    "Sen",
+    "Sharma",
+    "Shetty",
+    "Sinha",
+    "Subramanian",
+    "Thomas",
+    "Varghese",
+    "Verma"
+  ],
+  "story": [
+    {
+      "id": "CF2001",
+      "name": "Farah Siddiqui",
+      "department": "Sales",
+      "title": "Account Manager",
+      "joined": "2023-10-02",
+      "plant": [
+        "clean"
+      ]
+    },
+    {
+      "id": "CF2100",
+      "name": "Rehana Qureshi",
+      "department": "People",
+      "title": "HR Business Partner",
+      "role": "hrbp",
+      "joined": "2020-01-13"
+    },
+    {
+      "id": "CF2101",
+      "name": "Anand Venkatesh",
+      "department": "People",
+      "title": "Chief People Officer",
+      "role": "hr_head",
+      "joined": "2014-03-03"
+    }
+  ],
+  "templates": {
+    "employment": "Employment verification letter",
+    "visa": "Visa support letter",
+    "salary": "Salary certificate"
+  },
+  "pending_days": 2
+}

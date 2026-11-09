@@ -1,0 +1,321 @@
+{
+  "seed": 1042,
+  "today": "2026-11-09",
+  "prefix": "NA",
+  "first_id": 1200,
+  "headcount": 420,
+  "team_size": 8,
+  "people_per_hrbp": 110,
+  "founded": "2014-06-02",
+  "cutoff_day": 15,
+  "leaves": {
+    "privileged": {
+      "code": "PL",
+      "monthly": 1.5,
+      "late": 0.5,
+      "cap": 40,
+      "accrual": "2.1",
+      "carry": "2.2",
+      "bookings": [
+        3,
+        8
+      ],
+      "sizes": {
+        "0.5": 1,
+        "1": 5,
+        "2": 3,
+        "3": 2,
+        "5": 1
+      }
+    },
+    "casual": {
+      "code": "CL",
+      "monthly": 1,
+      "late": 0,
+      "cap": 0,
+      "accrual": "3.1",
+      "carry": "3.1",
+      "bookings": [
+        2,
+        6
+      ],
+      "sizes": {
+        "0.5": 2,
+        "1": 6,
+        "2": 1
+      }
+    }
+  },
+  "rates": {
+    "exited": 0.05,
+    "joined_this_year": 0.12,
+    "pending": 0.3,
+    "duplicate": 0.03,
+    "over_cap": 0.15
+  },
+  "pending_until": "2026-12-23",
+  "holidays": [
+    "2026-01-01",
+    "2026-01-26",
+    "2026-03-04",
+    "2026-04-03",
+    "2026-05-01",
+    "2026-08-15",
+    "2026-09-14",
+    "2026-10-02",
+    "2026-10-20",
+    "2026-11-09",
+    "2026-12-25"
+  ],
+  "departments": {
+    "Engineering": {
+      "share": 0.42,
+      "titles": [
+        "Software Engineer",
+        "Senior Software Engineer",
+        "Data Engineer",
+        "QA Engineer",
+        "Site Reliability Engineer"
+      ],
+      "manager": "Engineering Manager",
+      "director": "Director of Engineering"
+    },
+    "Data Science": {
+      "share": 0.18,
+      "titles": [
+        "Data Scientist",
+        "Data Analyst",
+        "Machine Learning Engineer",
+        "Biostatistician"
+      ],
+      "manager": "Data Science Manager",
+      "director": "Director of Data Science"
+    },
+    "Clinical Operations": {
+      "share": 0.16,
+      "titles": [
+        "Clinical Data Associate",
+        "Clinical Research Analyst",
+        "Medical Coder"
+      ],
+      "manager": "Clinical Operations Manager",
+      "director": "Director of Clinical Operations"
+    },
+    "Product and Design": {
+      "share": 0.1,
+      "titles": [
+        "Product Manager",
+        "Designer",
+        "Technical Writer"
+      ],
+      "manager": "Product Lead",
+      "director": "Director of Product"
+    },
+    "Finance and Operations": {
+      "share": 0.08,
+      "titles": [
+        "Accountant",
+        "Payroll Specialist",
+        "Procurement Analyst",
+        "IT Support Engineer"
+      ],
+      "manager": "Operations Manager",
+      "director": "Director of Finance"
+    },
+    "People": {
+      "share": 0.06,
+      "titles": [
+        "Talent Acquisition Specialist",
+        "HR Operations Associate"
+      ],
+      "manager": "HR Operations Manager",
+      "director": "Head of HR"
+    }
+  },
+  "first_names": [
+    "Aarav",
+    "Aditi",
+    "Akash",
+    "Ananya",
+    "Anil",
+    "Anjali",
+    "Arjun",
+    "Bhavna",
+    "Chetan",
+    "Deepa",
+    "Devika",
+    "Dhruv",
+    "Divya",
+    "Farhan",
+    "Gaurav",
+    "Harini",
+    "Ishaan",
+    "Jaya",
+    "Karthik",
+    "Kavya",
+    "Lakshmi",
+    "Manish",
+    "Meghna",
+    "Mohit",
+    "Nandini",
+    "Naveen",
+    "Nikhil",
+    "Pallavi",
+    "Pooja",
+    "Pranav",
+    "Rahul",
+    "Ramya",
+    "Ritika",
+    "Sanjay",
+    "Shreya",
+    "Siddharth",
+    "Sneha",
+    "Suresh",
+    "Tanvi",
+    "Tarun",
+    "Uma",
+    "Varun",
+    "Vidya",
+    "Vivek",
+    "Yamini",
+    "Zoya",
+    "Abhishek",
+    "Aishwarya",
+    "Rakesh",
+    "Swati"
+  ],
+  "last_names": [
+    "Agarwal",
+    "Bhat",
+    "Chandra",
+    "Deshpande",
+    "Fernandes",
+    "Ghosh",
+    "Hegde",
+    "Iyengar",
+    "Jain",
+    "Joshi",
+    "Kamath",
+    "Krishnan",
+    "Kulkarni",
+    "Menon",
+    "Mishra",
+    "Murthy",
+    "Naidu",
+    "Pillai",
+    "Prabhu",
+    "Rajan",
+    "Reddy",
+    "Saxena",
+    "Sen",
+    "Sharma",
+    "Shetty",
+    "Sinha",
+    "Subramanian",
+    "Thomas",
+    "Varghese",
+    "Verma"
+  ],
+  "story": [
+    {
+      "id": "NA1001",
+      "name": "Asha Rao",
+      "department": "Engineering",
+      "title": "Software Engineer",
+      "joined": "2022-03-14",
+      "plant": [
+        "pending"
+      ]
+    },
+    {
+      "id": "NA1002",
+      "name": "Rohan Das",
+      "department": "Data Science",
+      "title": "Data Analyst",
+      "joined": "2023-07-03",
+      "plant": [
+        "clean",
+        "repeats"
+      ]
+    },
+    {
+      "id": "NA1003",
+      "name": "Kiran Mehta",
+      "department": "Engineering",
+      "title": "QA Engineer",
+      "joined": "2021-01-11",
+      "exited": "2026-09-30",
+      "plant": [
+        "clean"
+      ]
+    },
+    {
+      "id": "NA1004",
+      "name": "Neha Kapoor",
+      "department": "Product and Design",
+      "title": "Designer",
+      "joined": "2024-02-19",
+      "plant": [
+        "duplicate"
+      ]
+    },
+    {
+      "id": "NA1005",
+      "name": "Arjun Malhotra",
+      "department": "Clinical Operations",
+      "title": "Clinical Research Analyst",
+      "joined": "2019-08-05",
+      "plant": [
+        "over_cap"
+      ]
+    },
+    {
+      "id": "NA1006",
+      "name": "Meenal Gupta",
+      "department": "Engineering",
+      "title": "Software Engineer",
+      "joined": "2026-03-23",
+      "plant": [
+        "clean"
+      ]
+    },
+    {
+      "id": "NA1100",
+      "name": "Priya Nair",
+      "department": "People",
+      "title": "HR Business Partner",
+      "role": "hrbp",
+      "joined": "2019-05-06"
+    },
+    {
+      "id": "NA1101",
+      "name": "Vikram Shah",
+      "department": "Engineering",
+      "title": "Engineering Manager",
+      "role": "manager",
+      "joined": "2018-09-24"
+    },
+    {
+      "id": "NA1102",
+      "name": "Sameer Gupta",
+      "department": "Engineering",
+      "title": "Director of Engineering",
+      "role": "director",
+      "joined": "2016-04-01"
+    },
+    {
+      "id": "NA1103",
+      "name": "Meera Iyer",
+      "department": "People",
+      "title": "Head of HR",
+      "role": "hr_head",
+      "joined": "2015-08-17"
+    }
+  ],
+  "templates": {
+    "employment": "Employment verification letter",
+    "visa": "Visa support letter",
+    "salary": "Salary certificate"
+  },
+  "pending_days": 2
+}

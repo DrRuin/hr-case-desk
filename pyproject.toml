@@ -1,0 +1,28 @@
+[project]
+name = "agentic-case-resolution"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "aiosqlite>=0.22.1",
+    "fastapi>=0.162.0",
+    "httpx>=0.28.1",
+    "langfuse>=5.2.0",
+    "pydantic-ai-slim[openai]==2.66.0",
+    "pydantic-settings>=2.16.2",
+    "uvicorn>=0.54.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "pytest-asyncio>=1.4.1.post1",
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = ["."]
+asyncio_default_fixture_loop_scope = "session"
+asyncio_default_test_loop_scope = "session"

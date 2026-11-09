@@ -1,0 +1,118 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/plus-jakarta-sans";
+@import "@fontsource-variable/newsreader";
+
+@theme inline {
+  --font-sans: "Geist Variable", system-ui, sans-serif;
+  --font-heading: "Plus Jakarta Sans Variable", "Geist Variable", sans-serif;
+  --font-serif: "Newsreader Variable", Georgia, serif;
+  --color-navy: var(--navy);
+  --color-blue: var(--blue);
+  --color-coral: var(--coral);
+  --color-violet: var(--violet);
+  --color-mint: var(--mint);
+  --color-amber: var(--amber);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  --navy: #0a2149;
+  --blue: #0183ff;
+  --coral: #ff6058;
+  --violet: #6f5cf6;
+  --mint: #0f9f73;
+  --amber: #c97a00;
+  --background: #f5f6f8;
+  --foreground: #0d1b33;
+  --card: #ffffff;
+  --card-foreground: #0d1b33;
+  --popover: #ffffff;
+  --popover-foreground: #0d1b33;
+  --primary: var(--blue);
+  --primary-foreground: #ffffff;
+  --secondary: #eaf2fd;
+  --secondary-foreground: #0a2149;
+  --muted: #eef2f8;
+  --muted-foreground: #5b6884;
+  --accent: #eaf2fd;
+  --accent-foreground: #0a2149;
+  --destructive: #d63c34;
+  --border: #e8ebf0;
+  --input: #d6deea;
+  --ring: #0183ff;
+  --radius: 0.75rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  button:focus-visible,
+  a:focus-visible,
+  [role="tab"]:focus-visible {
+    @apply outline-2 outline-offset-2 outline-blue;
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-heading);
+    letter-spacing: -0.01em;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  .cite {
+    @apply mx-0.5 inline-flex h-[1.15rem] min-w-[1.15rem] -translate-y-[0.35em] items-center justify-center rounded-md bg-blue/12 px-1 align-baseline font-sans text-[0.68rem] font-semibold text-blue transition-colors hover:bg-blue hover:text-white;
+  }
+  .cite[data-active="true"] {
+    @apply bg-blue text-white;
+  }
+  .glow {
+    animation: glow 1.6s ease-out;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .glow {
+      animation: none;
+    }
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--blue) 45%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 14px transparent;
+  }
+}

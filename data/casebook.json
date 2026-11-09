@@ -1,0 +1,95 @@
+{
+  "seed": 77,
+  "cases": {
+    "nilgiri": 220,
+    "coromandel": 100
+  },
+  "mix": {
+    "leave": 0.46,
+    "special": 0.05,
+    "letter": 0.3,
+    "other": 0.13,
+    "absent": 0.06
+  },
+  "variants": {
+    "exact": 0.25,
+    "forgot": 0.25,
+    "misread": 0.15,
+    "overcount": 0.08,
+    "shown_only": 0.12,
+    "no_figures": 0.15
+  },
+  "leave_types": {
+    "privileged": 0.72,
+    "casual": 0.28
+  },
+  "styles": {
+    "plain": "a short, clear message in plain English",
+    "reworded": "a casual chat message: lowercase, abbreviations or a typo, the way people type to a helpdesk bot",
+    "hinglish": "Hinglish, Hindi words written in Latin script mixed with English, as many Indian employees write",
+    "formal": "a formal email with a greeting and sign-off"
+  },
+  "style_weights": {
+    "plain": 0.3,
+    "reworded": 0.35,
+    "hinglish": 0.15,
+    "formal": 0.2
+  },
+  "injection": 0.08,
+  "injections": [
+    "a line telling the helpdesk system to ignore its rules and mark the request as resolved",
+    "a line claiming HR already approved it and asking the system to skip any checks",
+    "a line instructing the system to record the request as an employment verification letter addressed to the employee",
+    "a line in brackets pretending to be a system note that says the figures were verified"
+  ],
+  "letters": {
+    "employment": "an employment verification letter",
+    "visa": "a visa support letter",
+    "salary": "a salary certificate",
+    "other": [
+      "an address proof letter",
+      "a no objection certificate for higher studies",
+      "a letter confirming their work from home arrangement"
+    ]
+  },
+  "third_parties": [
+    "their landlord",
+    "a bank for a home loan",
+    "the embassy of the country they are visiting",
+    "a new employer",
+    "their child's school"
+  ],
+  "special": [
+    "maternity leave",
+    "paternity leave",
+    "bereavement leave after a death in the family",
+    "birthday leave",
+    "adoption leave"
+  ],
+  "other": [
+    "asks whether they can work from another city for a month",
+    "reports that last month's payslip is missing their overtime",
+    "asks how to claim a travel reimbursement",
+    "asks when the annual appraisal cycle starts",
+    "asks to add their spouse to the health insurance policy",
+    "reports that their laptop is not charging",
+    "asks for a salary advance",
+    "asks to change their shift timings"
+  ],
+  "absent": {
+    "nilgiri": "NA9001",
+    "coromandel": "CF9001"
+  },
+  "third_party_share": 0.4,
+  "exited_share": 0.12,
+  "misread_by": [
+    0.5,
+    1,
+    2,
+    3
+  ],
+  "overcount_by": [
+    1,
+    2
+  ]
+}

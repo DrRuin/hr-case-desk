@@ -1,0 +1,79 @@
+{
+  "people": {
+    "G100": {
+      "name": "Lena Fischer",
+      "title": "Account Manager",
+      "role": "employee",
+      "status": "active",
+      "joined": "2023-10-02",
+      "manager": "G200",
+      "hrbp": "G300"
+    },
+    "G200": {
+      "name": "Julia Weber",
+      "title": "Sales Director",
+      "role": "manager",
+      "status": "active",
+      "joined": "2017-06-05",
+      "manager": null,
+      "hrbp": "G300"
+    },
+    "G300": {
+      "name": "Omar Haddad",
+      "title": "HR Business Partner",
+      "role": "hrbp",
+      "status": "active",
+      "joined": "2020-01-13",
+      "manager": "G500",
+      "hrbp": "G500"
+    },
+    "G500": {
+      "name": "Anika Brandt",
+      "title": "Chief People Officer",
+      "role": "hr_head",
+      "status": "active",
+      "joined": "2014-03-03",
+      "manager": null,
+      "hrbp": null
+    }
+  },
+  "ledger": {
+    "G100": [
+      {
+        "id": "G-9001",
+        "kind": "grant",
+        "days": 20,
+        "source": "Globex leave policy GL-2 v1, 2026 entitlement",
+        "leave": "privileged"
+      },
+      {
+        "id": "C-9002",
+        "kind": "carry",
+        "days": 3,
+        "source": "carry-over from 2025 under GL-2 section 4",
+        "leave": "privileged"
+      },
+      {
+        "id": "T-9010",
+        "kind": "taken",
+        "days": 5,
+        "source": "request GR-9010",
+        "start": "2026-04-06",
+        "end": "2026-04-10",
+        "leave": "privileged"
+      },
+      {
+        "id": "L-9020",
+        "kind": "lapse",
+        "days": 3,
+        "source": "carry-over lapsed on 31 March under GL-2 section 4",
+        "leave": "privileged"
+      }
+    ]
+  },
+  "templates": {
+    "employment": "Employment verification letter",
+    "visa": "Visa support letter",
+    "salary": "Salary certificate"
+  }
+}

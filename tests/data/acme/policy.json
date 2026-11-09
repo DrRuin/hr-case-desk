@@ -1,0 +1,486 @@
+{
+  "name": "Acme Corp",
+  "fallback": "acme-hr-helpdesk",
+  "approvers": [
+    "hrbp",
+    "hr_head"
+  ],
+  "tables": {
+    "leave": {
+      "id": "LEAVE",
+      "version": 6,
+      "features": [
+        {
+          "name": "leave_type",
+          "label": "Leave type",
+          "read": "request",
+          "values": [
+            "privileged",
+            "casual",
+            "special"
+          ],
+          "meaning": {
+            "privileged": "privileged (earned or annual) leave, or a leave balance with no type named",
+            "casual": "casual or sick leave",
+            "special": "maternity, paternity, adoption, bereavement, birthday or any other kind of leave"
+          }
+        },
+        {
+          "name": "data",
+          "label": "HR system answer",
+          "values": [
+            "ok",
+            "absent",
+            "unavailable"
+          ],
+          "meaning": {
+            "ok": "the HR system answered with the employee's record",
+            "absent": "the HR system has no record of this employee",
+            "unavailable": "the HR system did not answer"
+          }
+        },
+        {
+          "name": "confirmed",
+          "label": "Second reading",
+          "values": [
+            "yes",
+            "no"
+          ],
+          "meaning": {
+            "yes": "an independent second reading agreed with how the request was read",
+            "no": "an independent second reading did not agree with how the request was read"
+          }
+        },
+        {
+          "name": "explanation",
+          "label": "Ledger explanation",
+          "values": [
+            "none_needed",
+            "unique",
+            "ambiguous",
+            "contradicts"
+          ],
+          "meaning": {
+            "none_needed": "the employee's figures already match the ledger",
+            "unique": "exactly one set of ledger entries explains the difference",
+            "ambiguous": "more than one set of ledger entries could explain the difference",
+            "contradicts": "no set of ledger entries explains the difference"
+          }
+        },
+        {
+          "name": "double_booked",
+          "label": "Overlapping leave",
+          "values": [
+            "no",
+            "yes"
+          ],
+          "meaning": {
+            "no": "no two leave entries cover the same day",
+            "yes": "two leave entries cover the same day"
+          }
+        },
+        {
+          "name": "gap_days",
+          "label": "Days of difference explained"
+        }
+      ],
+      "rules": [
+        {
+          "id": "L1",
+          "when": {
+            "leave_type": [
+              "privileged",
+              "casual"
+            ],
+            "data": [
+              "unavailable"
+            ]
+          },
+          "outcome": "escalate",
+          "says": "The Leave Balance Service did not answer, so no balance is stated and a person takes over."
+        },
+        {
+          "id": "L2",
+          "when": {
+            "leave_type": [
+              "privileged",
+              "casual"
+            ],
+            "data": [
+              "ok"
+            ],
+            "confirmed": [
+              "yes"
+            ],
+            "explanation": [
+              "ambiguous",
+              "contradicts"
+            ]
+          },
+          "outcome": "escalate",
+          "says": "The ledger does not account for the employee's figures in exactly one way, so a person checks it."
+        },
+        {
+          "id": "L3",
+          "when": {
+            "leave_type": [
+              "privileged",
+              "casual"
+            ],
+            "data": [
+              "ok"
+            ],
+            "confirmed": [
+              "yes"
+            ],
+            "explanation": [
+              "none_needed",
+              "unique"
+            ],
+            "double_booked": [
+              "yes"
+            ]
+          },
+          "outcome": "escalate",
+          "says": "Two leave bookings overlap in the ledger, and correcting the ledger is an HR change."
+        },
+        {
+          "id": "L4",
+          "when": {
+            "leave_type": [
+              "privileged",
+              "casual"
+            ],
+            "data": [
+              "ok"
+            ],
+            "confirmed": [
+              "yes"
+            ],
+            "explanation": [
+              "none_needed",
+              "unique"
+            ],
+            "double_booked": [
+              "no"
+            ],
+            "gap_days": [
+              null,
+              5
+            ]
+          },
+          "outcome": "resolve",
+          "says": "The ledger explains the difference exactly, and differences up to 5 days are answered directly."
+        },
+        {
+          "id": "L5",
+          "when": {
+            "leave_type": [
+              "privileged",
+              "casual"
+            ],
+            "data": [
+              "ok"
+            ],
+            "confirmed": [
+              "yes"
+            ],
+            "explanation": [
+              "none_needed",
+              "unique"
+            ],
+            "double_booked": [
+              "no"
+            ],
+            "gap_days": [
+              5,
+              null
+            ]
+          },
+          "outcome": "escalate",
+          "says": "Differences above 5 days are confirmed by HR before the employee is told."
+        },
+        {
+          "id": "L6",
+          "when": {
+            "leave_type": [
+              "privileged",
+              "casual"
+            ],
+            "data": [
+              "absent"
+            ]
+          },
+          "outcome": "escalate",
+          "says": "The Leave Balance Service has no ledger for this employee, so a person checks the record."
+        },
+        {
+          "id": "L7",
+          "when": {
+            "leave_type": [
+              "privileged",
+              "casual"
+            ],
+            "data": [
+              "ok"
+            ],
+            "confirmed": [
+              "no"
+            ]
+          },
+          "outcome": "escalate",
+          "says": "A second reading did not confirm the figures from the employee's own words, so a person checks them."
+        },
+        {
+          "id": "L8",
+          "when": {
+            "leave_type": [
+              "special"
+            ]
+          },
+          "outcome": "escalate",
+          "says": "Maternity, paternity, adoption, bereavement and birthday leave are granted by HR, so a person answers."
+        }
+      ],
+      "ask": "The employee questions their leave balance."
+    },
+    "document": {
+      "id": "DOCUMENT",
+      "version": 5,
+      "features": [
+        {
+          "name": "data",
+          "label": "HR system answer",
+          "values": [
+            "ok",
+            "absent",
+            "unavailable"
+          ],
+          "meaning": {
+            "ok": "the HR system answered with the employee's record",
+            "absent": "the HR system has no record of this employee",
+            "unavailable": "the HR system did not answer"
+          }
+        },
+        {
+          "name": "confirmed",
+          "label": "Second reading",
+          "values": [
+            "yes",
+            "no"
+          ],
+          "meaning": {
+            "yes": "an independent second reading agreed with how the request was read",
+            "no": "an independent second reading did not agree with how the request was read"
+          }
+        },
+        {
+          "name": "employment",
+          "label": "Employment status",
+          "values": [
+            "active",
+            "exited"
+          ],
+          "meaning": {
+            "active": "currently employed",
+            "exited": "has left the company"
+          }
+        },
+        {
+          "name": "kind",
+          "label": "Letter asked for",
+          "values": [
+            "employment",
+            "visa",
+            "salary",
+            "other"
+          ],
+          "meaning": {
+            "employment": "employment verification or proof of employment",
+            "visa": "visa support letter",
+            "salary": "salary certificate",
+            "other": "any other letter"
+          },
+          "read": "request"
+        },
+        {
+          "name": "recipient",
+          "label": "Addressed to",
+          "values": [
+            "self",
+            "third_party"
+          ],
+          "meaning": {
+            "self": "for the employee: addressed to them, or no other addressee is named",
+            "third_party": "addressed to someone else, such as an embassy, a bank or a landlord"
+          },
+          "read": "request"
+        }
+      ],
+      "rules": [
+        {
+          "id": "D1",
+          "when": {
+            "data": [
+              "unavailable"
+            ]
+          },
+          "outcome": "escalate",
+          "says": "The Org Hierarchy Service did not answer, so the employee's record could not be checked."
+        },
+        {
+          "id": "D2",
+          "when": {
+            "data": [
+              "ok"
+            ],
+            "confirmed": [
+              "yes"
+            ],
+            "employment": [
+              "exited"
+            ]
+          },
+          "outcome": "escalate",
+          "says": "Letters for people who have left are issued by HR."
+        },
+        {
+          "id": "D3",
+          "when": {
+            "data": [
+              "ok"
+            ],
+            "confirmed": [
+              "yes"
+            ],
+            "employment": [
+              "active"
+            ],
+            "kind": [
+              "employment"
+            ],
+            "recipient": [
+              "self"
+            ]
+          },
+          "outcome": "resolve",
+          "says": "Employment verification letters addressed to the employee are issued automatically."
+        },
+        {
+          "id": "D4",
+          "when": {
+            "data": [
+              "ok"
+            ],
+            "confirmed": [
+              "yes"
+            ],
+            "employment": [
+              "active"
+            ],
+            "kind": [
+              "employment"
+            ],
+            "recipient": [
+              "third_party"
+            ]
+          },
+          "outcome": "approve",
+          "says": "Letters addressed to a third party need the HR business partner's approval."
+        },
+        {
+          "id": "D5",
+          "when": {
+            "data": [
+              "ok"
+            ],
+            "confirmed": [
+              "yes"
+            ],
+            "employment": [
+              "active"
+            ],
+            "kind": [
+              "visa",
+              "salary"
+            ]
+          },
+          "outcome": "approve",
+          "says": "Visa and salary letters need the HR business partner's approval."
+        },
+        {
+          "id": "D6",
+          "when": {
+            "data": [
+              "ok"
+            ],
+            "confirmed": [
+              "yes"
+            ],
+            "employment": [
+              "active"
+            ],
+            "kind": [
+              "other"
+            ]
+          },
+          "outcome": "escalate",
+          "says": "There is no template for this letter, so HR writes it."
+        },
+        {
+          "id": "D7",
+          "when": {
+            "data": [
+              "absent"
+            ]
+          },
+          "outcome": "escalate",
+          "says": "The Org Hierarchy Service has no record of this employee, so a person checks who is asking."
+        },
+        {
+          "id": "D8",
+          "when": {
+            "data": [
+              "ok"
+            ],
+            "confirmed": [
+              "no"
+            ]
+          },
+          "outcome": "escalate",
+          "says": "A second reading did not confirm the letter or its recipient from the employee's words, so a person checks the request."
+        }
+      ],
+      "ask": "The employee asks HR for a letter."
+    },
+    "other": {
+      "id": "SCOPE",
+      "version": 2,
+      "features": [
+        {
+          "name": "intent",
+          "label": "Request type",
+          "values": [
+            "other",
+            "unreadable"
+          ],
+          "meaning": {
+            "other": "outside leave balances and HR letters",
+            "unreadable": "the request could not be read reliably"
+          }
+        }
+      ],
+      "rules": [
+        {
+          "id": "S1",
+          "when": {},
+          "outcome": "escalate",
+          "says": "Only leave balance questions and HR letters are handled automatically, so a person answers this."
+        }
+      ],
+      "ask": "Anything else."
+    }
+  },
+  "undone": "The letter could not be generated, so a person will finish it.",
+  "handbook": "Acme leave policy"
+}

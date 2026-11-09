@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>HR case desk walkthrough</title>
+    <style>
+      @font-face {
+        font-family: "Jakarta";
+        src: url("assets/jakarta.woff2") format("woff2");
+        font-weight: 200 800;
+      }
+      @font-face {
+        font-family: "Geist";
+        src: url("assets/geist.woff2") format("woff2");
+        font-weight: 100 900;
+      }
+      :root {
+        --navy: #002b54;
+        --blue: #0183ff;
+        --ink: #ffffff;
+        --soft: #cfe7ff;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        min-height: 100vh;
+        font-family: "Geist", system-ui, sans-serif;
+        color: var(--ink);
+        background: radial-gradient(900px 600px at 95% -10%, rgba(1, 131, 255, 0.45), transparent 60%),
+          linear-gradient(160deg, #002b54, #01376d 60%, #002246);
+        padding: 32px 16px 48px;
+      }
+      main {
+        max-width: 1180px;
+        margin: 0 auto;
+        display: grid;
+        gap: 24px;
+      }
+      h1 {
+        font: 800 clamp(28px, 4vw, 44px) / 1.05 "Jakarta", sans-serif;
+        letter-spacing: -0.03em;
+      }
+      p.lede {
+        color: var(--soft);
+        max-width: 760px;
+        margin-top: 8px;
+        line-height: 1.5;
+      }
+      .stage {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 960px) {
+        .stage {
+          grid-template-columns: 1fr 280px;
+        }
+      }
+      video {
+        width: 100%;
+        border-radius: 16px;
+        background: #001a33;
+        box-shadow: 0 24px 60px rgba(0, 12, 30, 0.5);
+      }
+      ol {
+        list-style: none;
+        padding: 0;
+        display: grid;
+        gap: 6px;
+        align-content: start;
+      }
+      button {
+        width: 100%;
+        display: flex;
+        gap: 12px;
+        align-items: baseline;
+        text-align: left;
+        font: 500 15px/1.3 "Geist", sans-serif;
+        color: var(--soft);
+        background: rgba(255, 255, 255, 0.06);
+        border: 1.5px solid transparent;
+        border-radius: 12px;
+        padding: 10px 14px;
+        cursor: pointer;
+      }
+      button:hover,
+      button:focus-visible {
+        border-color: rgba(95, 179, 255, 0.5);
+        outline: none;
+      }
+      button[aria-current="true"] {
+        background: var(--blue);
+        color: var(--ink);
+      }
+      footer {
+        color: var(--soft);
+        font-size: 14px;
+      }
+      a {
+        color: #5fb3ff;
+      }
+      time {
+        font: 500 13px "IBM Plex Mono", ui-monospace, monospace;
+        opacity: 0.8;
+        min-width: 44px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <h1>HR case desk</h1>
+        <p class="lede">
+          Five minutes on the live desk: how a request is read, checked, decided and answered, when a person is brought in,
+          and what an auditor can read afterwards.
+        </p>
+      </header>
+      <div class="stage">
+        <video id="video" src="walkthrough.mp4" poster="walkthrough.jpg" controls preload="metadata" playsinline></video>
+        <ol id="chapters" aria-label="Chapters"></ol>
+      </div>
+      <footer>
+        Code: <a href="https://github.com/DrRuin/hr-case-desk">github.com/DrRuin/hr-case-desk</a>. The narration is an AI
+        clone of the author's voice.
+      </footer>
+    </main>
+    <script>
+      const video = document.getElementById("video");
+      const list = document.getElementById("chapters");
+      const clock = (s) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, "0")}`;
+      fetch("chapters.json")
+        .then((r) => r.json())
+        .then((chapters) => {
+          const buttons = chapters.map((c) => {
+            const li = document.createElement("li");
+            const b = document.createElement("button");
+            b.innerHTML = `<time>${clock(c.time)}</time><span></span>`;
+            b.querySelector("span").textContent = c.title;
+            b.onclick = () => {
+              video.currentTime = c.time;
+              video.play();
+            };
+            li.appendChild(b);
+            list.appendChild(li);
+            return [c.time, b];
+          });
+          video.addEventListener("timeupdate", () => {
+            const now = buttons.filter(([t]) => t <= video.currentTime + 0.1).pop();
+            buttons.forEach(([, b]) => b.setAttribute("aria-current", String(now && b === now[1])));
+          });
+        });
+    </script>
+  </body>
+</html>
